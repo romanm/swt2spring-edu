@@ -11,6 +11,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -27,8 +29,12 @@ public class CaretSample2 {
 	}
 	private void make() {
 		JFrame frame = new JFrame("Caret Example");
+		JMenuBar mb = new JMenuBar();
+		JMenu mainMenu = new JMenu("Menu");
+		mb.add(mainMenu);
+		frame.setJMenuBar(mb);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(new Dimension(600, 400));
 		Container content = frame.getContentPane();
 
 		JPanel infoPanel = new JPanel();
@@ -36,8 +42,11 @@ public class CaretSample2 {
 
 		final JTextField dot = new JTextField();
 		final JTextField mark = new JTextField();
-
-		infoPanel(infoPanel, dot, mark);
+		JToolBar toolBar1 = new JToolBar();
+		addActionButton(toolBar1,mainMenu, "a1");
+		addActionButton(toolBar1,mainMenu, "a2");
+		JToolBar toolBar = toolBar1;
+		infoPanel(infoPanel, dot, mark,toolBar);
 
 		JTextArea textArea = new JTextArea();
 		JScrollPane scrollPane = new JScrollPane(textArea);
@@ -53,10 +62,8 @@ public class CaretSample2 {
 		dialogPanel.add(new Label("l3"));
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scrollPane,dialogPanel);
-		splitPane.setDividerLocation(250);
+		splitPane.setDividerLocation(450);
 
-		//   content.add(dotPanel, BorderLayout.NORTH);
-		//		content.add(scrollPane, BorderLayout.CENTER);
 		content.add(splitPane, BorderLayout.CENTER);
 		content.add(infoPanel, BorderLayout.SOUTH);
 
@@ -69,37 +76,28 @@ public class CaretSample2 {
 
 		textArea.addCaretListener(listener);
 
-		frame.setSize(250, 150);
+		frame.setSize(600, 400);
 		frame.setVisible(true);
 
 	}
-	private void infoPanel(JPanel infoPanel, final JTextField dot,final JTextField mark) {
-		JToolBar toolBar = makeToolBar();
+	private void infoPanel(JPanel infoPanel, final JTextField dot,final JTextField mark, JToolBar toolBar) {
 		infoPanel.add(toolBar);
-
 		dot.setEditable(false);
-		JLabel l1 = new JLabel("Dot: ");
-		infoPanel.add(l1);
+		infoPanel.add(new JLabel("Dot: "));
 		infoPanel.add(dot);
-
 		mark.setEditable(false);
-		JLabel l2 = new JLabel("Mark: ");
-		infoPanel.add(l2);
+		infoPanel.add(new JLabel("Mark: "));
 		infoPanel.add(mark);
 	}
-	private JToolBar makeToolBar() {
-		JToolBar toolBar = new JToolBar();
-		addActionButton(toolBar, "a1");
-		addActionButton(toolBar, "a2");
-		return toolBar;
-	}
-	private void addActionButton(JToolBar toolBar, String a1Str) {
-		AbstractAction a1 = new AbstractAction(a1Str) {
+	
+	private void addActionButton(JToolBar toolBar, JMenu mainMenu, String a1Str) {
+		AbstractAction action = new AbstractAction(a1Str) {
 			public void actionPerformed(ActionEvent actionEvent) {
 				System.out.println(actionEvent.getSource());
 			}
 		};
-		JButton a1Button = toolBar.add(a1);
+		JButton a1Button = toolBar.add(action);
 		a1Button.setText(a1Str);
+		mainMenu.add(action);
 	}
 }
