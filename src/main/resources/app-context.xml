@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-<beans>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+">
 	<bean id="mainFrame" class="edu.step2.dw.ui.MainFrame" init-method="init">
 		<property name="title"> <value>My First direct spring</value> </property>
 		<property name="contentPane"> <ref bean="mainPanel" /> </property>
 	</bean>
 	<bean id="mainPanel" class="edu.step2.dw.ui.BoxLayoutPanel" init-method="init">
-		<property name="axis"> <value>1</value> </property>
+		<property name="axis"> <util:constant static-field="javax.swing.BoxLayout.Y_AXIS"/> </property>
 		<property name="panelComponents">
 			<list>
-				<ref bean="itemScrollPane" />
 				<ref bean="buttonPanel" />
+				<ref bean="itemScrollPane" />
 			</list>
 		</property>
 	</bean>
@@ -34,7 +39,7 @@
 	</bean>
 	<!-- itemScrollPane END -->
 	<bean id="buttonPanel" class="edu.step2.dw.ui.BoxLayoutPanel" init-method="init">
-		<property name="axis"> <value>0</value> </property>
+		<property name="axis"><util:constant static-field="javax.swing.BoxLayout.X_AXIS"/></property>
 		<property name="panelComponents">
 			<list>
 				<ref bean="deleteButton" />

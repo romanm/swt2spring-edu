@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+">
+	<bean id="mainFrame" class="edu.step2.dw.ui.MainFrame" init-method="init">
+		<property name="title"> <value>SwingSpringOWS3</value> </property>
+		<property name="contentPane"> <ref bean="mainPanel" /> </property>
+	</bean>
+	<bean id="mainPanel" class="edu.step2.dw.ui.BoxLayoutPanel" init-method="init">
+		<property name="axis"> <util:constant static-field="javax.swing.BoxLayout.Y_AXIS" /> </property>
+		<property name="panelComponents">
+			<list>
+				<ref bean="buttonPanel" />
+			</list>
+		</property>
+	</bean>
+	<bean id="buttonPanel" class="edu.step2.dw.ui.BoxLayoutPanel" init-method="init">
+		<property name="axis"> <util:constant static-field="javax.swing.BoxLayout.X_AXIS" /> </property>
+		<property name="panelComponents">
+			<list>
+				<ref bean="deleteButton" />
+			</list>
+		</property>
+	</bean>
+	<bean id="deleteButton" class="edu.step2.dw.ui.button.ActionListenerButton" init-method="init">
+		<property name="text"> <value>Delete</value> </property>
+	</bean>
+</beans>

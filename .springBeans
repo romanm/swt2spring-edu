@@ -8,6 +8,7 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>src/main/resources/app-context.xml</config>
+		<config>src/main/resources/swingOws3.xml</config>
 	</configs>
 	<configSets>
 	</configSets>
