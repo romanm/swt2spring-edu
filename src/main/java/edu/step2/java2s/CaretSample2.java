@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -75,6 +76,7 @@ public class CaretSample2 {
 //		sidebarPanel.add(new JScrollPane(textDebugArea));
 		sidebarPanel.add(textDebugArea);
 		JScrollPane contextPane = contextPane();
+		contextPane.setBorder(BorderFactory.createTitledBorder( "Regime: FULFOX"));
 		regimeTasksTable = new TableSample3().makeTable();
 		regimeTasksTable.getSelectionModel().addListSelectionListener(new RowListener());
 		regimeTasksTable.getColumnModel().getSelectionModel().addListSelectionListener(new ColumnListener());
