@@ -1,4 +1,4 @@
-package edu.step2.java2s;
+package edu.sw2ows3;
 
 
 import java.awt.Dimension;

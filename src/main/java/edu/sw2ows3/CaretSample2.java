@@ -1,4 +1,4 @@
-package edu.step2.java2s;
+package edu.sw2ows3;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -74,6 +74,7 @@ public class CaretSample2 {
 		JPanel sidebarPanel = sidebarPanel2();
 		textDebugArea = new JTextArea();
 //		sidebarPanel.add(new JScrollPane(textDebugArea));
+		sidebarPanel.add(new TabbedPaneDemo2());
 		sidebarPanel.add(textDebugArea);
 		JScrollPane contextPane = contextPane();
 		contextPane.setBorder(BorderFactory.createTitledBorder( "Regime: FULFOX"));
