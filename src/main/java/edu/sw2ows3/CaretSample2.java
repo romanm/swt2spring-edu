@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.event.CaretEvent;
@@ -28,11 +27,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class CaretSample2 {
-	private JTextArea textDebugArea;
+//	private JTextArea textDebugArea;
+	private MyDebugTextArea textDebugArea;
+	
 	private JTable regimeTasksTable;
 	JTextField dot, mark ;
 	private JMenu mainMenu;
 	private JToolBar toolBar;
+	private TabbedPaneDemo2 tabbedEditTaskDrug;
 	
 	public JToolBar getToolBar() {
 		return toolBar;
@@ -53,7 +55,13 @@ public class CaretSample2 {
 		toolBar= new JToolBar();
 		infoPanel(infoPanel, toolBar);
 		JSplitPane splitPane = workPanel();
-		content.add(splitPane, BorderLayout.CENTER);
+		textDebugArea = new MyDebugTextArea();
+		textDebugArea.createPopupMenu();
+//		textDebugArea = new JTextArea();
+		JScrollPane jScrollPane = new JScrollPane(textDebugArea);
+		JSplitPane splitPane2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitPane, jScrollPane);
+		splitPane2.setDividerLocation(250);
+		content.add(splitPane2, BorderLayout.CENTER);
 		content.add(infoPanel, BorderLayout.SOUTH);
 		
 		CaretListener listener = new CaretListener() {
@@ -71,13 +79,14 @@ public class CaretSample2 {
 		mb.add(mainMenu);
 	}
 	private JSplitPane workPanel() {
-		JPanel sidebarPanel = sidebarPanel2();
-		textDebugArea = new JTextArea();
+		JPanel sidebarPanel = sidebarPanel();
 //		sidebarPanel.add(new JScrollPane(textDebugArea));
-		sidebarPanel.add(new TabbedPaneDemo2());
-		sidebarPanel.add(textDebugArea);
+		tabbedEditTaskDrug = new TabbedPaneDemo2();
+		sidebarPanel.add(tabbedEditTaskDrug);
+//		textDebugArea = new JTextArea();
+//		sidebarPanel.add(textDebugArea);
 		JScrollPane contextPane = contextPane();
-		contextPane.setBorder(BorderFactory.createTitledBorder( "Regime: FULFOX"));
+		contextPane.setBorder(BorderFactory.createTitledBorder("Regime: FULFOX"));
 		regimeTasksTable = new TableSample3().makeTable();
 		regimeTasksTable.getSelectionModel().addListSelectionListener(new RowListener());
 		regimeTasksTable.getColumnModel().getSelectionModel().addListSelectionListener(new ColumnListener());
@@ -87,7 +96,7 @@ public class CaretSample2 {
 		return splitPane;
 	}
 	
-	private JPanel sidebarPanel2() {
+	private JPanel sidebarPanel() {
 		JPanel sidebarPanel = new JPanel();
 		sidebarPanel.setLayout(new BoxLayout(sidebarPanel, BoxLayout.Y_AXIS));
 		sidebarPanel.add(new Label("l3"));
@@ -136,6 +145,8 @@ public class CaretSample2 {
             }
             textDebugArea.append("COLUMN SELECTION EVENT. \n");
             outputSelection();
+            int selectColumn = regimeTasksTable.getColumnModel().getSelectionModel().getLeadSelectionIndex();
+			tabbedEditTaskDrug.getTabbedPane().setSelectedIndex(selectColumn);
         }
     }
 	private void outputSelection() {
@@ -155,12 +166,17 @@ public class CaretSample2 {
 	
 	public static void main(String args[]) {
 		JFrame frame = new JFrame("Caret Example");
-		CaretSample2 sc2 = new CaretSample2(frame);
-		sc2.addAction(sc2.getToolBar(),sc2.getMainMenu(), "a1");
-		sc2.addAction(sc2.getToolBar(),sc2.getMainMenu(), "a2");
+		CaretSample2 sc2 = newInstance(frame);
 		frame.setSize(600, 400);
 		frame.setVisible(true);
 		sc2.addMenu(frame);
+	}
+	static CaretSample2 newInstance(JFrame frame) {
+		CaretSample2 sc2 = new CaretSample2(frame);
+		sc2.addAction(sc2.getToolBar(),sc2.getMainMenu(), "mi1");
+		sc2.addAction(sc2.getToolBar(),sc2.getMainMenu(), "mi2");
+		sc2.getMainMenu().addSeparator();
+		return sc2;
 	}
 	private CaretSample2() {}
 }

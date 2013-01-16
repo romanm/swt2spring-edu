@@ -1,6 +1,5 @@
 package edu.sw2ows3;
 
-
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -16,7 +15,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-/* Framework.java requires no other files. */
 public class Framework2 extends WindowAdapter {
     public int numWindows = 0;
     private Point lastLocation = null;
@@ -33,9 +31,7 @@ public class Framework2 extends WindowAdapter {
     	numWindows++;
 		JFrame frame = new JFrame("Caret Example "+numWindows);
         frame.addWindowListener(this);
-		CaretSample2 sc2 = new CaretSample2(frame);
-		sc2.addAction(sc2.getToolBar(),sc2.getMainMenu(), "a1");
-		sc2.addAction(sc2.getToolBar(),sc2.getMainMenu(), "a2");
+		CaretSample2 sc2 = CaretSample2.newInstance(frame);
 		frame.setSize(600, 400);
 		addWindowMenuItems(sc2.getMainMenu(),this,frame);
 		sc2.addMenu(frame);
@@ -180,4 +176,3 @@ public class Framework2 extends WindowAdapter {
             menu.add(item);
     }
 }
-

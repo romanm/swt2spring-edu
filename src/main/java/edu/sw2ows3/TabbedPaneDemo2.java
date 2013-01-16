@@ -1,24 +1,30 @@
 package edu.sw2ows3;
 
 
-import javax.swing.JTabbedPane;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
 public class TabbedPaneDemo2 extends JPanel {
-    public TabbedPaneDemo2() {
+    private JTabbedPane tabbedPane;
+
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
+	}
+
+	public TabbedPaneDemo2() {
         super(new GridLayout(1, 1));
         
-        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane = new JTabbedPane();
         tabbedPane.setTabPlacement(JTabbedPane.BOTTOM);
         
         JComponent panel1 = makeTextPanel("medicament");

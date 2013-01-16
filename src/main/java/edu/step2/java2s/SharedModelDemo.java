@@ -40,21 +40,16 @@ public class SharedModelDemo extends JPanel {
 
         list = new JList(dataModel);
         list.setCellRenderer(new DefaultListCellRenderer() {
-            public Component getListCellRendererComponent(JList l, 
-                                                          Object value,
-                                                          int i,
-                                                          boolean s,
-                                                          boolean f) {
+            public Component getListCellRendererComponent(
+			JList l, Object value, int i, boolean s, boolean f) {
                 String[] array = (String[])value;
-                return super.getListCellRendererComponent(l,
-                                                          array[0],
-                                                          i, s, f);
+                return super.getListCellRendererComponent(
+				l, array[0], i, s, f);
             }
         });
 
         listSelectionModel = list.getSelectionModel();
-        listSelectionModel.addListSelectionListener(
-                                new SharedListSelectionHandler());
+        listSelectionModel.addListSelectionListener(new SharedListSelectionHandler());
         JScrollPane listPane = new JScrollPane(list);
 
         table = new JTable(dataModel);
@@ -92,7 +87,7 @@ public class SharedModelDemo extends JPanel {
 
         //Build output area.
         output = new JTextArea(10, 40);
-        output.setEditable(false);
+//        output.setEditable(false);
         JScrollPane outputPane = new JScrollPane(output,
                          ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                          ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -104,8 +99,7 @@ public class SharedModelDemo extends JPanel {
         JPanel topHalf = new JPanel();
         topHalf.setLayout(new BoxLayout(topHalf, BoxLayout.X_AXIS));
         JPanel listContainer = new JPanel(new GridLayout(1,1));
-        listContainer.setBorder(BorderFactory.createTitledBorder(
-                                                "List"));
+        listContainer.setBorder(BorderFactory.createTitledBorder( "List"));
         listContainer.add(listPane);
         JPanel tableContainer = new JPanel(new GridLayout(1,1));
         tableContainer.setBorder(BorderFactory.createTitledBorder( "Table"));
@@ -186,8 +180,7 @@ public class SharedModelDemo extends JPanel {
         }
     }
 
-    class SharedDataModel extends DefaultListModel
-                          implements TableModel {
+    class SharedDataModel extends DefaultListModel implements TableModel {
         public String[] columnNames;
 
         public SharedDataModel(String[] columnNames) {

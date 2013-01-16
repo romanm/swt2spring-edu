@@ -1,6 +1,6 @@
 package edu.sw2ows3;
 import java.awt.BorderLayout;
-import java.util.Vector;
+
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -13,7 +13,7 @@ public class TableSample3 {
 	public static void main(String args[]) {
 		TableSample3 tableSample2 = new TableSample3();
 		JTable table = tableSample2.makeTable();
-		//    ColumnModelUtilities.removeHeaders(table.getColumnModel());
+		// ColumnModelUtilities.removeHeaders(table.getColumnModel());
 		JScrollPane scrollPane = new JScrollPane(table);
 		JFrame frame = new JFrame("JTable Anatomy");
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
